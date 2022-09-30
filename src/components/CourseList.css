@@ -1,0 +1,14 @@
+.card{
+    width: 20vw;
+    overflow-wrap: break-word;
+    padding: 50;
+}
+
+.cardGroup{
+    width: 100vw;
+    display: flex;
+    grid-template-columns: repeat(auto-fill, 14rem);
+    justify-content: space-evenly;
+}
+
+

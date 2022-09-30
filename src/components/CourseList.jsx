@@ -1,7 +1,14 @@
+import './CourseList.css';
+
 const CourseList = ({courses}) => {
     let courseKeys = Object.keys(courses)
-    return <div>
-        {courseKeys.map((course) => <div key={course}>{courses[course].term} CS {courses[course].number}: {courses[course].title}</div>)}
+    return <div className='cardGroup'>
+        {courseKeys.map((course) => <div key={course} className='card'>
+            <h5>{courses[course].term} CS {courses[course].number}</h5>
+            <p>{courses[course].title}</p>
+            <hr></hr>
+            <p>{courses[course].meets}</p>
+            </div>)}
     </div>
 };
 
