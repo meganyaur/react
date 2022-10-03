@@ -4,6 +4,7 @@ import './App.css';
 import Banner from './components/Banner';
 import CourseList from './components/CourseList';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useQuery } from '@tanstack/react-query';
 
 
 
