@@ -1,6 +1,8 @@
-import CourseList from './components/CourseList';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import Banner from './components/Banner';
+import CourseList from './components/CourseList';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/fetch';
 
@@ -26,3 +28,5 @@ const App = () => {
   </QueryClientProvider>
   );
 };
+
+export default App;
