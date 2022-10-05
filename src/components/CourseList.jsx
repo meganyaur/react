@@ -1,21 +1,13 @@
 import './CourseList.css';
+import Course from "./Course"
 
-const CourseList = ({courses, term}) => {
+const CourseList = ({courses, term, selected, toggleSelected}) => {
     return (
-        <div className="CardGroup"> {
+        <div className="CourseList"> {
             Object.entries(courses).filter(course => course[1].term === term).map(([id, course]) =>
-            <div key={id} className='card m-1 p-2'>
-                <div className='top'>
-                    <h5>{course.term} CS {course.number}</h5>
-                    <p>{course.title}</p>
-                </div>
-                <hr></hr>
-                <div className="card-body">
-                    <p>{course.meets}</p>
-                </div>
-            </div>
-            )
-            }
+            <Course key={id} id={id} course={course} selected={selected} toggleSelected={toggleSelected}
+            />
+        )}
         </div>
     )
 };

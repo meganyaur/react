@@ -1,0 +1,16 @@
+.card{
+    max-width: 20vw;
+    overflow-wrap: break-word;
+    padding: 50px;
+    height: 40vh;
+}
+
+.card .top{
+    height: 20vh;
+}
+
+.selected{
+    background-color: #8ddae6;
+    border-width: 3px;
+    border-color: #A7C7E7;
+}

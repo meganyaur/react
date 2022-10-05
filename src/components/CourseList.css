@@ -1,15 +1,4 @@
-.card{
-    max-width: 20vw;
-    overflow-wrap: break-word;
-    padding: 50px;
-    height: 40vh;
-}
-
-.card .top{
-    height: 20vh;
-}
-
-.CardGroup{
+.CourseList{
     display: grid;
     grid-template-columns: repeat(auto-fill, 14rem);
     justify-content: space-evenly;
