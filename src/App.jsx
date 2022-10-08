@@ -12,6 +12,7 @@ const queryClient = new QueryClient();
 const Main = () => {
   const [selection, setSelection] = useState("Fall");
   const [selected, setSelected] = useState([])
+  
   const toggleSelected = (course) => setSelected(
     selected.includes(course)
     ? selected.filter(x => x !== course)
