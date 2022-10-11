@@ -2,7 +2,7 @@ import CourseList from './CourseList';
 import ScheduleModule from './ScheduleModal';
 import { useState } from 'react';
 
-export default function TermPage({courses, selection, setSelection, selected, toggleSelected}) {
+export default function TermPage({courses, selection, setSelection, selected, toggleSelected, conflicts}) {
     const terms = ["Fall", "Winter", "Spring"];
     const [open, setOpen] = useState(false);
 
@@ -33,7 +33,7 @@ export default function TermPage({courses, selection, setSelection, selected, to
             <TermSelector selection={selection} setSelection={setSelection} />
             <button className="btn btn-outline-dark" onClick={openModal}>View Schedule</button>    
         </div>
-        <CourseList courses={courses} term={selection} selected={selected} toggleSelected={toggleSelected}/>
+        <CourseList courses={courses} term={selection} selected={selected} toggleSelected={toggleSelected} conflicts={conflicts}/>
         <ScheduleModule courses={courses} selected={selected} open={open} close={closeModal} />
       </div>
     );

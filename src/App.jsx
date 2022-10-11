@@ -5,19 +5,30 @@ import Banner from './components/Banner';
 import TermPage from './components/TermPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/fetch';
+import { addConflicts, removeConflicts } from "./utilities/conflict";
 import { useState } from 'react';
 
 const queryClient = new QueryClient();
 
 const Main = () => {
   const [selection, setSelection] = useState("Fall");
-  const [selected, setSelected] = useState([])
+  const [selected, setSelected] = useState([]);
+  const [conflicts, setConflicts] = useState([]);
   
-  const toggleSelected = (course) => setSelected(
-    selected.includes(course)
-    ? selected.filter(x => x !== course)
-    : [...selected, course]
-  )
+  const toggleSelected = (course) => {
+    if (selected.includes(course)) {
+      let newSelected = selected.filter((x) => x !== course);
+      setConflicts(() =>
+        removeConflicts(conflicts, newSelected, course, schedule.courses)
+      );
+      setSelected(newSelected);
+    } else {
+      setConflicts(() =>
+        addConflicts(conflicts, course, selected, schedule.courses)
+      );
+      setSelected([...selected, course]);
+    }
+  };
   const [schedule, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
 
   if (error) return <h1>Error loading user data: {`${error}`}</h1>;
@@ -26,7 +37,7 @@ const Main = () => {
 
   return  <div className="container">
             <Banner title={schedule.title}/>
-            <TermPage courses={schedule.courses} selection={selection} setSelection={setSelection} selected={selected} toggleSelected={toggleSelected}></TermPage>
+            <TermPage courses={schedule.courses} selection={selection} setSelection={setSelection} selected={selected} toggleSelected={toggleSelected} conflicts={conflicts}></TermPage>
           </div>;
 }
 
