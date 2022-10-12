@@ -47,8 +47,8 @@ const parseMeets = (meets) => {
   ) =>
     conflicts.filter(
       (conflict) =>
-        !twoCoursesConflict(courses[removedSelection], courses[conflict]) &&
+        !isCoursesConflict(courses[removedSelection], courses[conflict]) &&
         newSelected.some((selectedCourse) =>
-          twoCoursesConflict(courses[conflict], courses[selectedCourse])
+          isCoursesConflict(courses[conflict], courses[selectedCourse])
         )
     );

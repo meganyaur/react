@@ -3,10 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Banner from './components/Banner';
 import TermPage from './components/TermPage';
+import CourseFormPage from './components/CourseFormPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/fetch';
 import { addConflicts, removeConflicts } from "./utilities/conflict";
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -37,7 +39,12 @@ const Main = () => {
 
   return  <div className="container">
             <Banner title={schedule.title}/>
-            <TermPage courses={schedule.courses} selection={selection} setSelection={setSelection} selected={selected} toggleSelected={toggleSelected} conflicts={conflicts}></TermPage>
+            <BrowserRouter>
+              <Routes>
+                <Route path='/' element={<TermPage courses={schedule.courses} selection={selection} setSelection={setSelection} selected={selected} toggleSelected={toggleSelected} conflicts={conflicts} />}/>
+                <Route path='/edit/:id' element={<CourseFormPage courses={schedule.courses} />}></Route>
+              </Routes>
+            </BrowserRouter>
           </div>;
 }
 
