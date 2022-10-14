@@ -1,14 +1,15 @@
+import { useDbUpdate } from '../utilities/firebase';
 import { useFormData } from './useFormData';
 import { useNavigate } from 'react-router-dom';
 
 const validateCourseData = (key, val) => {
-//   switch (key) {
-//     case 'title': case 'lastName':
-//       return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
-//     case 'email':
-//       return /^\w+@\w+[.]\w+/.test(val) ? '' : 'must contain name@domain.top-level-domain';
-//     default: return '';
-//   }
+  switch (key) {
+    case 'title': case 'lastName':
+      return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
+    case 'email':
+      return (/^(M|Tu|W|Th|F)+ (([01]?[0-9]|2[0-3]):[0-5][0-9])-(([01]?[0-9]|2[0-3]):[0-5][0-9])$/.test(val) || /^$/.test(val) ) ? '' : 'must contain days and start-end, e.g., MWF 12:00-13:20';
+    default: return '';
+  }
     return '';
 };
 
@@ -33,13 +34,14 @@ const ButtonBar = ({message, disabled}) => {
 };
 
 const CourseForm = ({course}) => {
-//   const [update, result] = useDbUpdate(`/courses/${course.id}`);
-  const [state, change] = useFormData(null, course);
+  console.log(course)
+  const [update, result] = useDbUpdate(`/edit/${course.id}`);
+  const [state, change] = useFormData(validateCourseData, course);
   const submit = (evt) => {
-    // evt.preventDefault();
-    // if (!state.errors) {
-    //   update(state.values);
-    // }
+    evt.preventDefault();
+    if (!state.errors) {
+      update(state.values);
+    }
   };
 
   return (
@@ -47,7 +49,7 @@ const CourseForm = ({course}) => {
         <h1> Edit Course</h1>
       <InputField name="title" text="Title" state={state} change={change} />
       <InputField name="meets" text="Time" state={state} change={change} />
-      <ButtonBar message={""} />
+      <ButtonBar message={result?.message} />
     </form>
   )
 };
