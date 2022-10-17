@@ -19,9 +19,7 @@ const Course = ({ id, course, selected, toggleSelected, conflicts }) => {
       <hr></hr>
       <div className="card-body">
         <p>{course.meets}</p>
-        <a href="/edit/${id}">
-            <PencilSquare/>
-        </a>
+        <Link to={"/edit/" + id}><PencilSquare/></Link>
       </div>
     </div>
   );
