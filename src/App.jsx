@@ -13,6 +13,7 @@ import {
   useDbData,
 } from "./utilities/firebase";
 import { getUser } from "./components/User";
+import { useProfile } from "./utilities/profile";
 
 const SignInButton = () => (
   <button
@@ -31,12 +32,14 @@ const SignOutButton = () => (
 );
 
 const AuthButton = () => {
-  getUser();
   const [user] = useAuthState();
   return user ? <SignOutButton /> : <SignInButton />;
 };
 
 export default function App() {
+  const [data, dataError] = useDbData("/");
+  const [profile, profileLoading, profileError] = useProfile();
+
   const [selection, setSelection] = useState("Fall");
   const [selected, setSelected] = useState([]);
   const [conflicts, setConflicts] = useState([]);
@@ -55,11 +58,14 @@ export default function App() {
       setSelected([...selected, course]);
     }
   };
-  const [data, dataError] = useDbData("/");
 
   if (dataError) return <h1>Error loading data: {dataError.toString()}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
+
+  if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
+  if (profileLoading) return <h1>Loading user profile</h1>;
+  if (!profile) return <h1>No profile data</h1>;
 
   return (
     <div className="container">
@@ -77,6 +83,7 @@ export default function App() {
                 selected={selected}
                 toggleSelected={toggleSelected}
                 conflicts={conflicts}
+                profile={profile}
               />
             }
           />

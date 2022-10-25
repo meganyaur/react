@@ -1,7 +1,7 @@
 import "./CourseList.css";
 import Course from "./Course";
 
-const CourseList = ({ courses, term, selected, toggleSelected, conflicts }) => {
+const CourseList = ({ courses, term, selected, toggleSelected, conflicts, profile}) => {
   return (
     <div className="CourseList">
       {" "}
@@ -15,6 +15,7 @@ const CourseList = ({ courses, term, selected, toggleSelected, conflicts }) => {
             selected={selected}
             toggleSelected={toggleSelected}
             conflicts={conflicts}
+            profile={profile}
           />
         ))}
     </div>

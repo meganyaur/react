@@ -2,7 +2,7 @@ import "./Course.css";
 import { PencilSquare} from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 
-const Course = ({ id, course, selected, toggleSelected, conflicts }) => {
+const Course = ({ id, course, selected, toggleSelected, conflicts, profile }) => {
   return (
     <div
       className={`card m-1 p-2 ${selected.includes(id) ? "selected" : ""}${
@@ -19,7 +19,7 @@ const Course = ({ id, course, selected, toggleSelected, conflicts }) => {
       <hr></hr>
       <div className="card-body">
         <p>{course.meets}</p>
-        <Link to={"/edit/" + id}><PencilSquare/></Link>
+        {profile?.isAdmin && (<Link to={"/edit/" + id}><PencilSquare/></Link>)}
       </div>
     </div>
   );
