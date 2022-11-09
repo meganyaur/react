@@ -9,6 +9,7 @@ const Course = ({ id, course, selected, toggleSelected, conflicts, profile }) =>
         conflicts.includes(id) ? "conflict" : ""
       }`}
       onClick={() => !conflicts.includes(id) && toggleSelected(id)}
+      data-cy="course"
     >
       <div className="top">
         <h5>
