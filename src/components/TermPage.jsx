@@ -11,7 +11,7 @@ export default function TermPage({title, courses, selection, setSelection, selec
     const closeModal = () => setOpen(false);
     
     const TermButton = ({term, selection, setSelection}) => (
-        <div>
+        <div htmlFor={term} data-cy={term}>
             <input type="radio" id={term} className="btn-check" checked={term === selection} autoComplete="off"
                 onChange={() => setSelection(term)} />
             <label className="btn btn-success mb-1 p-2" htmlFor={term}>
